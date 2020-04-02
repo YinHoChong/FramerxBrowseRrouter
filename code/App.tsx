@@ -20,30 +20,6 @@ import { fontFamily, fontSize, gray2 } from "./css/Styles";
 let logo = "./code/svg/Netflix_2015_logo.svg";
 let logoPath = url(logo).replace("/preview", "");
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-
-  &:focus {
-    color: red;
-  }
-  ,
-  &:hover {
-    color: blue;
-  }
-  ,
-  &:visited {
-    color: white;
-  }
-  ,
-  &:link {
-    color: white;
-  }
-  ,
-  &:active {
-    color: green;
-  }
-`;
-
 const AppWrapper = styled.div`
   font-size: ${fontSize};
 `;
@@ -79,6 +55,30 @@ const NavItem = styled.li`
   flex-grow: 2;
   transition: color 0.2s ease 0s;
   padding: 0px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus {
+    color: red;
+  }
+  ,
+  &:hover {
+    color: blue;
+  }
+  ,
+  &:visited {
+    color: white;
+  }
+  ,
+  &:link {
+    color: white;
+  }
+  ,
+  &:active {
+    color: green;
+  }
 `;
 
 const Container = styled.div`
@@ -125,7 +125,7 @@ export function App(props) {
             {/* <img src={logoPath} className="logo" alt="Logo Image" /> */}
             <NavList>
               <NavItem>
-                <StyledLink>
+                <StyledLink to="/">
                   <Container>
                     <motion.svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +202,7 @@ export function App(props) {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/projects" component={Projects} />
+          <Route path="/projects" component={Projects} />
           <Route path="/articles" component={Articles} />
           <Route path="/about" component={About} />
         </Switch>
