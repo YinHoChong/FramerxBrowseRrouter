@@ -10,7 +10,7 @@ export function About(props) {
 
   return (
     <div>
-      <Title>Projects</Title>
+      <Title>About</Title>
     </div>
     // <Frame
     //     {...rest}

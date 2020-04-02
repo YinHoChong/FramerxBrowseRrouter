@@ -20,7 +20,7 @@ export function Projects(props) {
   return (
     <div>
       <Title>Projects</Title>
-      <Thumbnails>
+      {/* <Thumbnails>
         <Thumbnail
           link="/twitter"
           image="https://d33wubrfki0l68.cloudfront.net/491cd9faae7c161b935c4ed683c5bbcf75139e52/9cf41/static/images/wallpapers/playground-01.png"
@@ -41,7 +41,7 @@ export function Projects(props) {
           title="Photoshop Redesign"
           category="Desktop App"
         />
-      </Thumbnails>
+      </Thumbnails> */}
     </div>
     // <Frame
     //     {...rest}

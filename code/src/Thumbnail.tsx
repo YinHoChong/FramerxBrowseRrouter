@@ -1,10 +1,9 @@
 import * as React from "react";
 import { Frame, addPropertyControls, ControlType } from "framer";
-import { Link } from "react-router-dom"; // Import the Link component
 import styled from "styled-components";
 
-// Open Preview: Command + P
-// Learn more: https://framer.com/api
+// Import the BrowserRouter, Route and Link components
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const Project = styled.div`
   flex: 1 0 3%;
@@ -28,15 +27,17 @@ export function Thumbnail(props) {
   const { text, tint, ...rest } = props;
 
   return (
-    <Project>
-      <Link to={props.link}>
-        <div className="project-image">
-          <img src={props.image} alt="Project Image" />
-        </div>
-        <div className="project-title">{props.title}</div>
-        <div className="project-category">{props.category}</div>
-      </Link>
-    </Project>
+    <Router>
+      <Project>
+        <Link to={props.link}>
+          <div className="project-image">
+            <img src={props.image} alt="Project Image" />
+          </div>
+          <div className="project-title">{props.title}</div>
+          <div className="project-category">{props.category}</div>
+        </Link>
+      </Project>
+    </Router>
   );
 }
 

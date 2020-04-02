@@ -1,33 +1,7 @@
 import * as React from "react";
-import { Frame, addPropertyControls, ControlType, Scroll } from "framer";
-import { url } from "framer/resource";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import styled from "styled-components";
-
-// Import the BrowserRouter, Route and Link components
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Home } from "./src/containers/home/Home";
-import { Projects } from "./src/Projects";
-import { Articles } from "./src/Articles";
-import { About } from "./src/About";
-
-import { Title } from "./src/Title";
-
-import { fontFamily, fontSize, gray2 } from "./css/Styles";
-// Open Preview: Command + P
-// Learn more: https://framer.com/api
-
-// let logo = "./code/svg/logo.svg";
-let logo = "./code/svg/Netflix_2015_logo.svg";
-let logoPath = url(logo).replace("/preview", "");
-
-const AppWrapper = styled.div`
-  font-size: ${fontSize};
-`;
-
-const AppLogo = styled.img`
-  height: 40px;
-`;
 
 const Header = styled.div`
   font-family: Colfax, "Neue Helvetica W02", "Helvetica Neue", Helvetica, Arial,
@@ -53,7 +27,6 @@ const NavList = styled.ul`
   background: none;
   text-decoration: none;
 `;
-
 const NavItem = styled.li`
   user-select: none;
   -webkit-box-flex: 2;
@@ -88,7 +61,7 @@ const StyledLink = styled(Link)`
   // }
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 150px;
   height: 150px;
   display: flex;
@@ -108,7 +81,7 @@ const Container = styled.div`
   }
 `;
 
-const icon = {
+export const icon = {
   hidden: {
     opacity: 0,
     pathLength: 0,
@@ -121,22 +94,11 @@ const icon = {
   }
 };
 
-///
-{
-  /* <BrowserRouter>
-  <div>
-   <Route path="/" component={} />
-  </div>
-</BrowserRouter> */
-}
-
-const NavigationBar = () => (
+export const NavigationBar = () => (
   <Header>
     <NavList>
       <NavItem>
         <StyledLink to="/">
-          {/* <AppLogo src={logoPath} alt="logo" /> */}
-          {/* <img src={logoPath} alt="Logo Image" height="48px" /> */}
           <Container>
             <motion.svg
               xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +139,7 @@ const NavigationBar = () => (
           </Container>
         </StyledLink>
       </NavItem>
-      {/* Set up the Links */}
+
       <NavItem>
         <StyledLink to="/">Home</StyledLink>
       </NavItem>
@@ -193,62 +155,3 @@ const NavigationBar = () => (
     </NavList>
   </Header>
 );
-
-export function App(props) {
-  const { text, tint, ...rest } = props;
-
-  return (
-    <Router>
-      <AppWrapper>
-        <NavigationBar />
-        {/*
-          A <Switch> looks through all its children <Route>
-          elements and renders the first one whose path
-          matches the current URL. Use a <Switch> any time
-          you have multiple routes, but you want only one
-          of them to render at a time
-        */}
-        <AnimatePresence exitBeforeEnter={false} initial={false}>
-          <Switch>
-            <Route exact path="/" component={Home}></Route>
-            <Route path="/projects" component={Projects} />{" "}
-            <Route path="/articles" component={Articles} />
-            <Route path="/about" component={About} />{" "}
-          </Switch>{" "}
-        </AnimatePresence>
-      </AppWrapper>
-    </Router>
-  );
-}
-
-// You can think of these components as "pages"
-// in your app.
-
-// function Home() {
-//   return (
-//     <div>
-//       <Title>Home</Title>
-//     </div>
-//   );
-// }
-
-App.defaultProps = {
-  height: 128,
-  width: 240,
-  text: "Get started!",
-  tint: "#0099ff"
-};
-
-// Learn more: https://framer.com/api/property-controls/
-addPropertyControls(App, {
-  text: {
-    title: "Text",
-    type: ControlType.String,
-    defaultValue: "Hello Framer!"
-  },
-  tint: {
-    title: "Tint",
-    type: ControlType.Color,
-    defaultValue: "#0099ff"
-  }
-});

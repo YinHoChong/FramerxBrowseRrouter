@@ -1,30 +1,123 @@
 import * as React from "react";
-import { Frame, addPropertyControls, ControlType } from "framer";
+import { Frame, addPropertyControls, ControlType, Scroll } from "framer";
 import { Title } from "./Title";
+
+import { motion, Variants, AnimatePresence } from "framer-motion";
+import { CardDp } from "../components/CardDp";
+import styled from "styled-components";
+// import { showNext, showPrevious } from "@framer/steveruizok.flow/code";
+import useStore from "../utils/store";
 
 // Open Preview: Command + P
 // Learn more: https://framer.com/api
 
-export function Articles(props) {
-  const { text, tint, ...rest } = props;
+const DpWrapper = styled.div`
+  margin: 24px;
+`;
+
+const CardsList = styled(motion.ul)`
+  display: flex;
+  flex-direction: row;
+  // justify-content: center;
+  justify-content: flex-start;
+//   align-items:center;
+  padding: 0;
+  // margin: 0 24px 0 24px;
+  list-style: none;
+  flex-wrap: wrap;
+  }
+`;
+
+const CardItem = styled(motion.li)`
+  // margin: 0 8px 0 8px;
+  min-width: 208px;
+  // max-width: 308px;
+  margin: 8px;
+  // flex: 1 1 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 0;
+  z :first-child {
+    // margin: 0px 8px 0 0;
+    margin: 8px;
+  }
+
+  :last-child {
+    // margin: 0px 0px 0 8px;
+    margin: 8px;
+  }
+`;
+
+const transition = { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] };
+
+const list = {
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.2,
+      staggerChildren: 0.07
+    }
+  },
+  hidden: { opacity: 0 }
+};
+
+const thumbnailVariants = {
+  initial: { scale: 0.9, opacity: 0 },
+  enter: { scale: 1, opacity: 1, transition },
+  exit: {
+    scale: 0.5,
+    opacity: 0,
+    transition: { duration: 1.5, ...transition }
+  }
+};
+
+const item = {
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 100 }
+};
+
+export function Articles() {
+  /// STORE HOIKS
+  const [store, setStore] = useStore();
+  // console.log(store);
 
   return (
-    <Title>Articles</Title>
+    <Scroll width={"100%"} height={"100%"}>
+      <Frame style={{ background: "none" }}>
+        <DpWrapper>
+          <Title>Articles</Title>
 
-    // <Frame
-    //     {...rest}
-    //     background={tint}
-    //     whileHover={{
-    //         scale: 1.1,
-    //     }}
-    //     style={{
-    //         color: "#fff",
-    //         fontSize: 16,
-    //         fontWeight: 600,
-    //     }}
-    // >
-    //     {text}
-    // </Frame>
+          <CardsList
+            initial="hidden"
+            animate="visible"
+            // variants={list}
+            // variants={{ exit: { transition: { staggerChildren: 0.1 } } }}
+          >
+            {store.digitalProducts.map((section, i) => (
+              <CardItem
+                onClick={() => {
+                  // showNext("DpOverview");
+                  //// STORE
+                  setStore({ currentDigitalProduct: section });
+                }}
+                // onClick={() => console.log("Hello")}
+                variants={item}
+                key={section.id}
+                // onClick={() => handleCardClick(section.type)}
+              >
+                <CardDp
+                  title={section.title}
+                  owner={section.owner}
+                  description={section.description}
+                  //   active={selectedItem === section.type}
+                  //   disabled={selectedItem !== section.type && selectedItem !== null}
+                />
+              </CardItem>
+            ))}
+          </CardsList>
+        </DpWrapper>
+      </Frame>
+    </Scroll>
   );
 }
 
