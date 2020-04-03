@@ -83,7 +83,8 @@ export function Articles() {
 
   return (
     <Scroll width={"100%"} height={"100%"}>
-      <Frame style={{ background: "none" }}>
+      {/* <Frame style={{ background: "none" }}> */}
+      <Frame>
         <DpWrapper>
           <Title>Articles</Title>
 
